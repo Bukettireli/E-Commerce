@@ -1,92 +1,73 @@
-import React, { useState } from 'react';
-import TopBar from './TopBar'; 
-import { ShoppingCart, Menu, Heart, User, Search, ChevronDown } from 'lucide-react';
+import React from 'react';
+import { Search, ShoppingBag, User } from 'lucide-react'; 
 
 function Header() {
-    
-    const [isMenuOpen, setIsMenuOpen] = useState(false); 
-
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Shop', path: '/shop', dropdown: true },
-        { name: 'About', path: '/about' },
-        { name: 'Blog', path: '/blog' },
-        { name: 'Contact', path: '/contact' },
-        { name: 'Pages', path: '/pages' },
+        { name: 'Erkek', href: '/men' },
+        { name: 'Kadın', href: '/women' },
+        { name: 'Aksesuarlar', href: '/accessories' },
+        { name: 'Hakkımızda', href: '/about' },
+        { name: 'İletişim', href: '/contact' },
     ];
-    
-    const categories = {
-        Kadın: ['Bags', 'Belts', 'Cosmetics', 'Hats'],
-        Erkek: ['Bags', 'Belts', 'Cosmetics', 'Hats'],
-    };
-
-    const DropdownMenu = () => (
-        <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-0 z-50 min-w-[300px] border border-gray-100 left-1/2 transform -translate-x-1/2">
-            <div className="flex p-4">
-                {Object.keys(categories).map(key => (
-                    <div key={key} className="flex flex-col mr-8 min-w-[100px]">
-                        <h4 className="font-bold text-[#252B42] mb-2">{key}</h4>
-                        {categories[key].map(item => (
-                            <a key={item} href="#" className="text-gray-600 hover:text-[#23A6F0] py-1 text-sm whitespace-nowrap">
-                                {item}
-                            </a>
-                        ))}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-
 
     return (
-        <header className="sticky top-0 z-50 bg-white shadow-md">
-            <TopBar /> 
-            
-            <nav className="container mx-auto flex justify-between items-center py-4 px-4 h-[70px]">
-                
-                <div className="flex items-center"> 
+        <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100 w-full">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
                     
-                    <h1 className="text-2xl font-bold text-[#252B42] mr-12">Bandage</h1> 
-                    <div className="flex items-center space-x-6 lg:space-x-8">
-                        {navLinks.map(link => (
-                            <div key={link.name} className={`relative ${link.dropdown ? 'group' : ''}`}>
-                                <a 
-                                    href={link.path} 
-                                    className="font-bold text-sm text-[#737373] hover:text-[#252B42] flex items-center transition"
-                                >
-                                    {link.name}
-                                    {link.dropdown && <ChevronDown size={14} className="ml-1 text-[#737373] group-hover:text-[#252B42] transition" />}
-                                </a>
-                                {link.dropdown && <DropdownMenu />}
-                            </div>
+                    <div className="flex-shrink-0">
+                        <a href="/" className="text-2xl font-extrabold text-[#2DC071] tracking-wider">
+                            BANDAGE
+                        </a>
+                    </div>
+                    
+                    <nav className="hidden lg:flex lg:gap-x-8">
+                        {navLinks.map((link) => (
+                            <a 
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-medium text-gray-700 hover:text-[#2DC071] transition duration-150 py-2"
+                            >
+                                {link.name}
+                            </a>
                         ))}
-                    </div>
-                </div>
+                    </nav>
 
-                
-                <div className="flex items-center space-x-4 lg:space-x-8 text-[#23A6F0]">
-                    
+                    <div className="flex items-center gap-x-4">
+                      
+                        <a href="/login" className="flex items-center text-sm font-medium text-[#2DC071] hover:text-green-700 transition duration-150 hidden md:flex">
+                            <User size={18} className="mr-1" />
+                            <span>Login / Register</span>
+                        </a>
+
                   
-                    <div className="flex items-center space-x-2">
-                       <User size={20} />
-                       <span className="font-bold text-sm">Login / Register</span>
+                        <div className="flex items-center gap-x-4">
+                         
+                            <button className="text-gray-700 hover:text-[#2DC071] transition p-1" aria-label="Arama">
+                                <Search size={20} />
+                            </button>
+
+                 
+                            <a href="/cart" className="relative text-gray-700 hover:text-[#2DC071] transition p-1" aria-label="Sepetim">
+                                <ShoppingBag size={20} />
+                                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                                    1
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <button 
+                            className="lg:hidden text-gray-700 hover:text-[#2DC071] transition p-1" 
+                            aria-label="Mobil Menü"
+                        >
+                            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+
                     </div>
-                    
-                    <Search size={20} className="hover:text-[#252B42] cursor-pointer" />
-                    
-                    <div className="flex items-center space-x-1">
-                      <Heart size={20} />
-                      <span className="text-sm font-bold text-[#252B42]">1</span> 
-                    </div>
-                    
-                    <div className="flex items-center space-x-1">
-                        <ShoppingCart size={20} />
-                        <span className="text-sm font-bold text-[#252B42]">0</span>
-                    </div>
-                    
                 </div>
-            </nav>
-            
+            </div>
         </header>
     );
 }

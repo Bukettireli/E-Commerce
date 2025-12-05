@@ -18,7 +18,7 @@ function HeroSection() {
                 <div className="flex flex-col justify-center w-full md:w-1/2 lg:w-[500px]">
                     
                     <p className="text-base font-bold tracking-wide mb-8 text-[#FFFFFF]">
-                        SUMMER 2025
+                        SUMMER 2020
                     </p>
                     
                     <h2 className="text-5xl md:text-6xl lg:text-[58px] font-bold mb-8 leading-tight text-[#FFFFFF]">
